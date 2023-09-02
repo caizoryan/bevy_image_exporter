@@ -1,0 +1,48 @@
+[package]
+name = "bevy_image_export"
+version = "0.8.0"
+edition = "2021"
+categories = ["graphics", "rendering"]
+keywords = ["creative", "coding", "sketching"]
+description = "Bevy plugin for rendering image sequences"
+documentation = "https://docs.rs/bevy_image_export"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/paulkre/bevy_image_export"
+
+[dependencies]
+bevy = { version = "0.11", default-features = false, features = [
+  "bevy_render",
+  "bevy_asset",
+] }
+image = { version = "0.24", default-features = false }
+futures = "0.3"
+futures-lite = "1"
+wgpu = "0.16"
+bytemuck = "1.13"
+
+[features]
+default = ["png"]
+png = ["image/png"]
+jpeg = ["image/jpeg"]
+exr = ["image/exr"]
+
+[dev-dependencies]
+design_to_blocks = { path = "../design_to_ortho" }
+bevy = { version = "0.11", default-features = false, features = [
+  "bevy_sprite",
+  "bevy_winit",
+  "bevy_core_pipeline",
+  "bevy_pbr",
+  "hdr",
+  "tonemapping_luts",
+  "ktx2",
+  "zstd",
+] }
+image = { version = "0.24", default-features = false, features = ["exr"] }
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
